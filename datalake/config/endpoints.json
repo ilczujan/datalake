@@ -26,7 +26,8 @@
     "sighting": "mrti/threats/sighting-file/{hashkey}/",
     "sighting-filtered": "mrti/threats/sighting/filtered/",
     "sources": "mrti/sources/",
-    "filtered-tag-subcategory":"mrti/tag-subcategory/filtered/"
+    "filtered-tag-subcategory":"mrti/tag-subcategory/filtered/",
+    "scoring-history": "mrti/threats/{hashkey}/scoring-history"
   },
   "threats-manual-bulk-size": 100,
   "api_version": "v2/"
