@@ -141,6 +141,36 @@ class Threats(Endpoint):
         )
         return parse_response(response)
 
+    @output_supported({Output.JSON, Output.CSV})
+    def scoring_history(
+            self,
+            hashkey,
+            interval,
+            date_from=None,
+            date_to=None,
+            output=Output.JSON,
+    ) -> dict:
+        """
+        Look up a threat in the API, returning its id (called threat's hashkey) and if it is present in Datalake.
+
+        The hashkey is also based on the threat type.
+        """
+
+        url = self._build_url_for_endpoint("scoring-history").format(hashkey=hashkey)
+        params = {
+            "interval": interval
+        }
+        if date_from: params["date_from"] = date_from
+        if date_to: params["date_to"] = date_to
+
+        req = PreparedRequest()
+        req.prepare_url(url, params)
+        print(req.url)
+        response = self.datalake_requests(
+            req.url, "get", self._get_headers(output=output)
+        )
+        return parse_response(response)
+
     def atom_values_extract(
         self, untyped_atoms: List[str], treat_hashes_like=AtomType.FILE
     ) -> dict:
